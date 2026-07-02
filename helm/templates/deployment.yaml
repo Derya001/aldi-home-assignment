@@ -20,7 +20,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           
           ports:
-            - containerPort: 5000
+            - containerPort: {{ .Values.service.targetPort }}
 
           env:
             - name: ENVIRONMENT
