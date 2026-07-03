@@ -2,18 +2,18 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 
 metadata:
-  name: myapp
+  name: {{ include "myapp.fullname" . }}
 
 spec:
   rules:
     - host: myapp.local
       http:
-        paths:  
+        paths:
           - path: /
             pathType: Prefix
-            
+
             backend:
               service:
-                name: myapp
+                name: {{ include "myapp.fullname" . }}
                 port:
                   number: 80

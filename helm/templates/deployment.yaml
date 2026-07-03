@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: {{ include "myapp.fullname" . }}
 
 spec:
   replicas: 1
 
   selector:
     matchLabels:
-      app: myapp
+      {{- include "myapp.selectorLabels" . | nindent 6 }}
 
   template:
     metadata:
       labels:
-        app: myapp
+        {{- include "myapp.labels" . | nindent 8 }}
     spec:
       containers:
         - name: myapp
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          
+
           ports:
             - containerPort: {{ .Values.service.targetPort }}
 
